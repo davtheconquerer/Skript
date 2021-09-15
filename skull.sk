@@ -1,0 +1,11 @@
+#
+# Made by Its_ShadowDev
+#
+on death of player:
+    attacker is a player
+    victim is a player
+    set {_skull} to victim's skull #sets a temporary variable to the killed player's skull
+    set name of {_skull} to "&e%victim%&e's head" #sets the name to victim's head e.g. "Shadow's Head"
+    set lore of {_skull} to "&5Killed by %attacker%" #adds a description to the head to say who killed them e.g. "Killed by ShadowDev"
+    drop {_skull} #drops the skull with all their items Note: if keepinventory is on it will still drop
+

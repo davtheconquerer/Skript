@@ -1,0 +1,128 @@
+# Made by ItsShadowDev
+
+
+options:
+    # Prefix in the chat for all messages
+    Prefix: &8&l[&c&l!&8&l]
+    # The time of which a player can be classed as in combat
+    CT-Time: 15
+
+
+# Do not edit this loop
+every 1 second:
+    loop all players:
+        if {combatlog::*} contains loop-player: #Checks if the loop player is in the list
+            set {_CT.span} to difference between {%loop-player%.combatlog.time} and now
+            set {_CT.cd} to "{@CT-Time} seconds" parsed as timespan
+            send action bar "&fYou are in Combat for &e%difference between {_CT.span} and {_CT.cd}%&f. &cDo not disconnect!" to loop-player
+
+
+
+command /pvp [<text>]: #Creates a command called "/pvp"
+    trigger:
+        if {combatlog::*} does not contain player:
+            if arg-1 is not set:
+                if {pvp.%player's uuid%} is true:
+                    set {pvp.%player's uuid%} to false
+                    send "{@Prefix} &6PvP is now disabled" to player
+                else:
+                    set {pvp.%player's uuid%} to true
+                    send "{@Prefix} &6PvP is now enabled" to player
+            else if arg-1 is "on":
+                if {pvp.%player's uuid%} is true:
+                    send "{@Prefix} &6PvP is already enabled" to player
+                else:
+                    set {pvp.%player's uuid%} to true
+                    send "{@Prefix} &6PvP is now enabled" to player
+            else if arg-1 is "off":
+                if {pvp.%player's uuid%} is true:
+                    set {pvp.%player's uuid%} to false
+                    send "{@Prefix} &6PvP is now disabled" to player
+                else:
+                    send "{@Prefix} &6PvP is already disabled" to player
+
+on join:
+    if {pvp.%player's uuid%} is not set:
+        set {pvp.%player's uuid%} to false
+    send "{@Prefix} &6You have pvp set to %{pvp.%player's uuid%}%"
+
+
+on unload:
+    delete {combatlog::*}
+    delete {combatlog.blocked-cmds::*}
+    delete {kill.combat::*}
+
+# The block commands list
+#  just add a new line and change the contents in ""
+on load:
+    add "old-smp" to {combatlog.blocked-cmds::*}
+    add "home" to {combatlog.blocked-cmds::*}
+    add "spawn" to {combatlog.blocked-cmds::*}
+    add "mini" to {combatlog.blocked-cmds::*}
+    add "creative" to {combatlog.blocked-cmds::*}
+    add "pvp" to {combatlog.blocked-cmds::*}
+
+
+on damage:
+    if attacker is a player:
+        if victim is a player:
+
+            if attacker is not victim:
+
+                if {pvp.%attacker's uuid%} is true:
+                    if {pvp.%victim's uuid%} is true:
+
+                        if {combatlog::*} doesn't contain "%attacker%":
+                            add "%attacker%" to {combatlog::*}
+                            send "{@Prefix} &fYou are in &cCombat &fwith &e%victim%" to attacker
+
+                        if {combatlog::*} doesn't contain "%victim%":
+                            add "%victim%" to {combatlog::*}
+                            send "{@Prefix} &fYou are in &cCombat &fwith &e%attacker%" to victim
+
+                        set {%attacker%.combatlog.time} to now
+                        set {%victim%.combatlog.time} to now
+
+                    else:
+                        send "{@Prefix} &c%victim% &6has pvp &cdisabled" to attacker
+
+                else:
+                    send "{@Prefix} &cYou &6have pvp &cdisabled" to attacker
+
+            else:
+                send "{@Prefix} &6You cannot engage combat with yourself, &csilly&6!"
+
+
+on command:
+    if {combatlog::*} contains player:
+        if {combatlog.blocked-cmds::*} contains command:
+            cancel event
+            send "{@Prefix} &fYou can't use that command while in &cCombat" to player
+
+
+on join:
+    if {kill.combat::*} contains player:
+        wait 1 second
+        console command "/kill %player%"
+        remove player from {kill.combat::*}
+
+on quit:
+    if {combatlog::*} contains player:
+        loop player's inventory:
+            drop loop-value
+        clear player's inventory
+        add player to {kill.combat::*}
+        remove player from {combatlog::*}
+
+
+on death of player:
+    if {combatlog::*} contains victim:
+        remove victim from {combatlog::*}
+
+
+every 1 second:
+    loop {combatlog::*}:
+        set {_combatlog.gettime} to difference between {%loop-value%.combatlog.time} and now
+        if {_combatlog.gettime} > {@CT-Time} seconds:
+            remove loop-value from {combatlog::*}
+            send action bar "{@Prefix} &fYou are no longer in &cCombat" to loop-value parsed as player

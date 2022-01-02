@@ -7,4 +7,3 @@ on death of player: #checks if player died
     set name of {_skull} to "&e%victim%&e's head" #adds a name to the skull
     set lore of {_skull} to "&5Killed by %attacker%" #adds lore to the skull
     drop {_skull} #drops the skull where the player died
-#lol

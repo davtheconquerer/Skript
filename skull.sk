@@ -1,3 +1,5 @@
+# Made by ItsShadowDev
+
 on death of player: #checks if player died
     attacker is a player #checks if the player was killed by a player
     victim is a player #checks if the victim is actually a player

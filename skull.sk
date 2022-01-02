@@ -4,7 +4,5 @@ on death of player: #checks if player died
     attacker is a player #checks if the player was killed by a player
     victim is a player #checks if the victim is actually a player
     set {_skull} to victim's skull #sets a local variable as the players skull
-    set name of {_skull} to "&e%victim%&e's head" #adds a name to the skull
-    set lore of {_skull} to "&5Killed by %attacker%" #adds lore to the skull
+    set lore of {_skull} to "&5killed by deez nuts" #adds lore to the skull
     drop {_skull} #drops the skull where the player died
-#lol

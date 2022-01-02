@@ -1,0 +1,44 @@
+# Made by ItsShadowDev
+# Animals that work with this skript: dogs, cats and parrots.
+
+
+command /givepet [<player>]: #Creating the command
+    description: &aDo /givepet <player> to transfer ownership of cat or dog to another player. &cDo /givepet with no arguments to cancel. #This is what appears in the /help menu
+    usage: Correct Usage: /givepet <player> #This is so if they type it incorrectly it will help them
+    trigger:
+        if arg-1 is set: #Checking if they input an argument
+            if arg-1 is the player: #Checks if the argument is themselves
+                send "&cYou cannot transfer ownership to yourself: &cCorrect Usage: /givepet <player>" to player #Sends an error message
+            else:
+                set {owner.animal.%player's uuid%} to arg-1 #It will now set a variable as the first argument
+                send "&a&lRight click on a pet to transfer ownership to &c%arg-1%" to player #Tells them to right click their pet
+        else if arg-1 is not set:
+            if {owner.animal.%player's uuid%} is set: #Checks whether the variable is set
+                delete {owner.animal.%player's uuid%} #Deletes the variable
+                send "&cCancelled" to player #Sends a message to the player
+            else:
+                send "&cCorrect Usage: /givepet <player>" to player #Gives them a correct usage
+
+on right click on wolf:
+    if player is owner of clicked entity: #Checks if they own the wolf
+        if {owner.animal.%player's uuid%} is set: #Checks if they have run the /givepet command
+            set {_i} to {owner.animal.%player's uuid%} #sets a local variable as the owner variable
+            delete {owner.animal.%player's uuid%} #Deletes the owner variable
+            set owner of event-entity to {_i} #Sets the owner to the first argument in the command on line 5
+            send "&aYou have successfully given your pet to %{_i}%" to player #Sends a message to the player
+
+on right click on cat:
+    if player is owner of clicked entity:
+        if {owner.animal.%player's uuid%} is set:
+            set {_i} to {owner.animal.%player's uuid%}
+            delete {owner.animal.%player's uuid%}
+            set owner of event-entity to {_i}
+            send "&aYou have successfully given your pet to %{_i}%" to player
+
+on right click on parrot:
+    if player is owner of clicked entity:
+        if {owner.animal.%player's uuid%} is set:
+            set {_i} to {owner.animal.%player's uuid%}
+            delete {owner.animal.%player's uuid%}
+            set owner of event-entity to {_i}
+            send "&aYou have successfully given your pet to %{_i}%" to player

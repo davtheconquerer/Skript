@@ -5,7 +5,7 @@ options:
     # Prefix in the chat for all messages
     Prefix: &8&l[&c&l!&8&l]
     # The time of which a player can be classed as in combat
-    CT-Time: 15
+    CT-Time: 10
 
 
 # Do not edit this loop

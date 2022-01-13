@@ -19,7 +19,7 @@ loop all players:
 
 command /annoucement [<text>]:
 permission: {@perm}
-permission message: {@perm_mess}
+permission message: "%{@perm_mess}%"
 trigger:
     if arg-1 is not set:
         send "&4Error: /annoucement <message>" to player

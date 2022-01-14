@@ -1,4 +1,4 @@
-#Made by ItsShadowDev
+# Made by ItsShadowDev
 
 
 function chain(b: block, n: number, p: player): #Creates a function with 3 parameters

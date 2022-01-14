@@ -3,7 +3,7 @@
 
 
 command /givepet [<player>]: #Creating the command
-    description: &aDo /givepet <player> to transfer ownership of cat or dog to another player. &cDo /givepet with no arguments to cancel. #This is what appears in the /help menu
+    description: &aDo /givepet <player> to transfer ownership of dogs, cats or parrots to another player. &cDo /givepet with no arguments to cancel. #This is what appears in the /help menu
     usage: Correct Usage: /givepet <player> #This is so if they type it incorrectly it will help them
     trigger:
         if arg-1 is set: #Checking if they input an argument

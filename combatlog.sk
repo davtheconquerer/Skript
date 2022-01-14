@@ -90,7 +90,7 @@ on damage:
                     send "{@Prefix} &cYou &6have pvp &cdisabled" to attacker
 
             else:
-                send "{@Prefix} &6You cannot engage combat with yourself, &csilly&6!"
+                send "{@Prefix} &6You cannot engage combat with yourself, &csilly&6!" to attacker
 
 
 on command:

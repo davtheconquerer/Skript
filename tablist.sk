@@ -1,27 +1,23 @@
 #Made by ItsShadowDev
 
-options:
-    # Permission:
-    perm: admin.announce
-    # Permission Message:
-    perm_mess: &4You do not have access to this command!
+
+every 20 ticks:
+    loop all players:
+        set loop-player's tab list header to "&6--- Friend's SMP ---%nl%"
+        set loop-player's tab list footer to "%nl%&7Online: &e%number of online players%"
+        set loop-player's tab list name to loop-player's displayname
 
 
 
-
-loop all players:
-    set tab list header to "&6Friend's SMP\n&7Latest Annoucement: %{annoucement.server}%" of loop-player
-    set tab list footer to "&7TPS: &e%tps from the last 1 minute%" of loop-player
-    set loop-player's tab list name to "%loop-player's displayname% &e%loop-player's ping%"
-
-
-
-
-command /annoucement [<text>]:
-permission: {@perm}
-permission message: "%{@perm_mess}%"
-trigger:
-    if arg-1 is not set:
-        send "&4Error: /annoucement <message>" to player
-    else:
-        set {annoucement.server} to arg-1
+command /afk:
+    cooldown: 3 seconds
+    cooldown message: &6&l[SERVER] &eYou have &a%remaining time% &euntil you can use this command again.
+    trigger:
+        if {afk.players::*} does not contain player:
+            add player to {afk.players::*}
+            set player's displayname to "%player's name% &4&l*AFK*"
+            send "&6&l[SERVER] &e%player% went afk" to all players
+        else:
+            remove player from {afk.players::*}
+            set player's displayname to player's name
+            send "&6&l[SERVER] &e%player% is back" to all players

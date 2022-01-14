@@ -9,3 +9,12 @@ command /rename [<text>]:
             set name of player's tool to colored arg-1
         else:
             send "&c[!] &7You need to provide a name. &c/rename Cool Sword" to player
+
+command /lore [<text>]:
+    permission: skript.itemeditor.lore
+    permission message: &4You dont have access to this command!
+    trigger:
+        if arg-1 is set:
+            set lore of player's tool to colored arg-1
+        else:
+            send "&c[!] &7You need to provide a name. &c/lore <lore>" to player

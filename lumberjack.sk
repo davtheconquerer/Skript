@@ -1,6 +1,12 @@
 # Made by ItsShadowDev
 
 
+options:
+    # The Lumber Axe item
+    lumberaxe: a gold axe named "&eLumber Axe" with lore "&7Cut a whole tree down in one chop."
+
+
+
 function chain(b: block, n: number, p: player): #Creates a function with 3 parameters
     wait 1 tick #delay
     if {_n} is less than 50: #checks if the 2nd parameter is less than 50
@@ -18,7 +24,7 @@ function chain(b: block, n: number, p: player): #Creates a function with 3 param
 on break:
     if gamemode of player is survival: #Checks if the player is in survival mode
         if event-block is any log: #Checks if the broken block is a log of any type
-            if player's tool is a gold axe named "&eLumber Axe" with lore "&7Cut a whole tree down in one chop.": #Checks if they are holding a special item
+            if player's tool is {@lumberaxe}: #Checks if they are holding a special item
                 set {_tree} to false
                 loop blocks above event-block:
                     if loop-block is any leaves:

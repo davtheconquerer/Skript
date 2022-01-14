@@ -1,5 +1,6 @@
 # Made by ItsShadowDev
 
+
 on death of player: #checks if player died
     attacker is a player #checks if the player was killed by a player
     victim is a player #checks if the victim is actually a player
@@ -7,3 +8,11 @@ on death of player: #checks if player died
     set name of {_skull} to "&e%victim%&e's head"
     set lore of {_skull} to "&5Killed by %attacker%" #adds lore to the skull
     drop {_skull} #drops the skull where the player died
+
+
+command /skull [<offlineplayer>]:
+    trigger:
+        if arg-1 is not set:
+            send "&c&l[!] &7You must specify a player. Command: &c/skull <player>" to player
+        else:
+            give arg-1's skull to the player

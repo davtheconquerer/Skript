@@ -1,3 +1,11 @@
 # Made by ItsShadowDev
 
 
+command /rename [<text>]:
+    permission: skript.itemeditor.rename
+    permission message: &4You dont have access to this command!
+    trigger:
+        if arg-1 is set:
+            set name of player's tool to colored arg-1
+        else:
+            send "&c[!] &7You need to provide a name. &c/rename Cool Sword" to player

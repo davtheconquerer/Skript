@@ -3,7 +3,7 @@
 
 options:
     # The Lumber Axe item
-    lumberaxe: a gold axe named "&eLumber Axe" with lore "&7Cut a whole tree down in one chop."
+    lumberaxe: a diamond axe named "&eLumber Axe" with lore "&dCut a whole tree down in one chop."
 
 
 
@@ -18,7 +18,7 @@ function chain(b: block, n: number, p: player): #Creates a function with 3 param
                     chain(loop-block,{_n}, {_p})
                     break loop-block naturally
                     play sound "BLOCK_WOOD_BREAK" with volume 1 at location of loop-block for all players
-                    wait 10 tick
+                    wait 10 ticks
 
 
 on break:
@@ -31,3 +31,9 @@ on break:
                         set {_tree} to true
                 if {_tree} is true:
                     chain(event-block, 0, player)
+
+
+on load:
+    set {_s} to {@lumberaxe}
+    register new shaped recipe for {_s} using air, diamond block, diamond block, diamond block, stick, air, air, stick and air with id "lumber_axe_1"
+    register new shaped recipe for {_s} using air, diamond block, diamond block, air, stick, diamond block, air, stick and air with id "lumber_axe_2"

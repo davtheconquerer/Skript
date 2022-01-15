@@ -1,0 +1,42 @@
+#Made by ItsShadowDev
+
+
+options:
+    # Name of plane
+    item: a gray dye of infinity 1 named "&bAviation558's Private Jet" with lore "&5Right click to place down." and "&6&lLEGENDARY"
+
+
+on right click:
+    if player's tool is a gray dye of infinity 1 named "&bAviation558's Private Jet" with lore "&5Right click to place down." and "&6&lLEGENDARY":
+        set player's tool to a lime dye of infinity 1 named "&aAviation558's Private Jet" with lore "&5Right click on a jet to despawn it" and "&6&lLEGENDARY"
+        spawn a chicken at player
+        add "{Invulnerable:1b}" to nbt of last spawned entity
+        add "{CustomNameVisible:1b}" to nbt of last spawned entity
+        add "{Silent:1b}" to nbt of last spawned entity
+        set name of last spawned entity to "&bAviation558's Private Jet"
+        
+
+on right click on chicken:
+    if player's tool is a lime dye of infinity 1 named "&aAviation558's Private Jet" with lore "&5Right click on a jet to despawn it" and "&6&lLEGENDARY":
+        set player's tool to a gray dye of infinity 1 named "&bAviation558's Private Jet" with lore "&5Right click to place down." and "&6&lLEGENDARY"
+        kill clicked entity
+    else if clicked entity's name is "&bAviation558's Private Jet":
+        teleport the player to clicked entity
+        wait a tick
+        make player ride clicked entity
+        while player is riding clicked entity:
+            wait a tick
+            while player is holding a lime dye of infinity 1 named "&aAviation558's Private Jet" with lore "&5Right click on a jet to despawn it" and "&6&lLEGENDARY":
+                push clicked entity in direction of player at speed 0.5
+                wait 3 ticks
+        
+        
+
+on load:
+    set {_s} to {@item}
+    register new shaped recipe for {_s} using air, diamond block, air, obsidian, totem of undying, obsidian, air, feather, air with id "private_jet"
+
+
+
+
+

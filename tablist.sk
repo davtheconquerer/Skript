@@ -21,3 +21,21 @@ command /afk:
             remove player from {afk.players::*}
             set player's displayname to player's name
             send "&6&l[SERVER] &e%player% is back" to all players
+
+on chat:
+    if {afk.players::*} contains player:
+        remove player from {afk.players::*}
+        send "&6&l[SERVER] &e%player% is back" to all players
+        wait a tick
+
+on command:
+    if {afk.players::*} contains player:
+        remove player from {afk.players::*}
+        send "&6&l[SERVER] &e%player% is back" to all players
+        wait a tick
+
+on chat:
+    if {afk.players::*} contains player:
+        remove player from {afk.players::*}
+        send "&6&l[SERVER] &e%player% is back" to all players
+        wait a tick

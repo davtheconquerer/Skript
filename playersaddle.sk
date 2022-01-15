@@ -1,0 +1,18 @@
+#Made by ItsShadowDev
+
+
+options:
+    # The custom item
+    item: a saddle named "&6&lPlayer Saddle" with lore "&5Right click on a player to ride them" and "&b&lRARE"
+
+
+
+
+on right click on player:
+    if player's tool is {@item}:
+        make player ride clicked entity
+
+
+on load:
+    set {_s} to {@item}
+    register new shapeless recipe for {_s} using player head, saddle with id "player_saddle"

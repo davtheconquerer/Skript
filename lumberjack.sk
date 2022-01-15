@@ -3,7 +3,7 @@
 
 options:
     # The Lumber Axe item
-    lumberaxe: a diamond axe named "&eLumber Axe" with lore "&dCut a whole tree down in one chop."
+    lumberaxe: a diamond axe named "&e&lLumber Axe" with lore "&5Cut a whole tree down in one chop." and "&5&lEPIC"
 
 
 
@@ -35,5 +35,4 @@ on break:
 
 on load:
     set {_s} to {@lumberaxe}
-    register new shaped recipe for {_s} using air, diamond block, diamond block, diamond block, stick, air, air, stick and air with id "lumber_axe_1"
-    register new shaped recipe for {_s} using air, diamond block, diamond block, air, stick, diamond block, air, stick and air with id "lumber_axe_2"
+    register new shaped recipe for {_s} using air, diamond block, diamond block, air, stick, diamond block, air, stick and air with id "lumber_axe_1"

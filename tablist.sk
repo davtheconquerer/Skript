@@ -3,9 +3,11 @@
 
 every 20 ticks:
     loop all players:
-        set loop-player's tab list header to "&6--- Friend's SMP ---%nl%"
-        set loop-player's tab list footer to "%nl%&7Online: &e%number of online players%"
+        set loop-player's tab list header to "&r%nl%&b&lFriends' SMP"
+
         set loop-player's tab list name to loop-player's displayname
+
+        set loop-player's tab list footer to "%nl%&7Online: &e%number of online players%"
 
 
 
@@ -29,12 +31,6 @@ on chat:
         wait a tick
 
 on command:
-    if {afk.players::*} contains player:
-        remove player from {afk.players::*}
-        send "&6&l[SERVER] &e%player% is back" to all players
-        wait a tick
-
-on chat:
     if {afk.players::*} contains player:
         remove player from {afk.players::*}
         send "&6&l[SERVER] &e%player% is back" to all players

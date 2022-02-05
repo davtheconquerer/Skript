@@ -3,7 +3,8 @@
 
 every 20 ticks:
     loop all players:
-        set loop-player's tab list header to "&r%nl%&b&lFriends' SMP"
+        set {_upperHeader} to "&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,&a.&2,"
+        set loop-player's tab list header to "%{_upperHeader}%&r%nl%&b.: &lFriends' SMP&r&b :."
 
         set loop-player's tab list name to loop-player's displayname
 

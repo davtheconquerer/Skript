@@ -1,0 +1,64 @@
+on right click:
+    if player's tool is a stick named "&5Dimension Shifter &7(&aoverworld&7)":
+        if player is in world "world":
+            send "&cYou are already in that dimension, dummy!" to player
+        else:
+            cancel event
+            set {_x} to x-coordinate of player's location
+            set {_y} to y-coordinate of player's location
+            set {_z} to z-coordinate of player's location
+            if player is in world "world_nether": #some maths as 8 blocks in the overworld is 1 block in the nether
+                set {_x} to ({_x}*8)
+                set {_z} to ({_z}*8)
+            teleport player to location {_x}, {_y}, {_z} in world "world"
+                
+    if player's tool is a stick named "&5Dimension Shifter &7(&cnether&7)":
+        if player is in world "world_nether":
+            send "&cYou are already in that dimension, dummy!" to player
+        else:
+            cancel event
+            set {_x} to x-coordinate of player's location
+            set {_y} to y-coordinate of player's location
+            set {_z} to z-coordinate of player's location
+            if player is in world "world":
+                set {_x} to ({_x}/8)
+                set {_z} to ({_z}/8)
+            teleport player to location {_x}, {_y}, {_z} in world "world_nether"
+                
+    if player's tool is a stick named "&5Dimension Shifter &7(&bthe end&7)":
+        if player is in world "world_the_end":
+            send "&cYou are already in that dimension, dummy!" to player
+        else:
+            cancel event
+            set {_x} to x-coordinate of player's location
+            set {_y} to y-coordinate of player's location
+            set {_z} to z-coordinate of player's location
+            if player is in world "world_nether":
+                set {_x} to ({_x}*8)
+                set {_z} to ({_z}*8)
+            teleport player to location {_x}, {_y}, {_z} in world "world_the_end"
+
+on left click:
+    if player is in world "world":
+        set line 4 of lore of player's tool to "&7World: &aOverworld"
+    if player is in world "world_nether":
+        set line 4 of lore of player's tool to "&7World: &cNether"
+    if player is in world "world_the_end":
+        set line 4 of lore of player's tool to "&7World: &bThe End"
+        
+    if player's tool is a stick named "&5Dimension Shifter &7(&aoverworld&7)":
+        set name of player's tool to "&5Dimension Shifter &7(&cnether&7)"
+        cancel event
+    else if player's tool is a stick named "&5Dimension Shifter &7(&cnether&7)":
+        set name of player's tool to "&5Dimension Shifter &7(&bthe end&7)"
+        cancel event
+    else if player's tool is a stick named "&5Dimension Shifter &7(&bthe end&7)":
+        set name of player's tool to "&5Dimension Shifter &7(&aoverworld&7)"
+        cancel event
+
+
+on load: #crafting receipe
+    set {_s} to a stick
+    set name of {_s} to "&5Dimension Shifter &7(&aoverworld&7)"
+    set lore of {_s} to "&7Teleport to different dimensions" and "&7using the power of the elements" and "" and "&7World: &aOverworld"
+    register new shaped recipe for {_s} using blaze powder, totem of undying, blaze powder, endstone, stick, endstone, air, stick, air with id "dimension_staff"

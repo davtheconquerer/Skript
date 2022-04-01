@@ -1,0 +1,16 @@
+on portal enter:
+    if event-world is "world_the_end":
+        if event-entity is a player:
+            if {spawnpoint.%uuid of player%} is set:
+                teleport player to {spawnpoint.%uuid of player%}
+            else:
+                teleport player to spawn
+
+on right click on any bed:
+    set {spawnpoint.%uuid of player%} to location of event-block
+
+every 20 ticks:
+    loop all players:
+        loop blocks from {spawnpoint.%uuid of loop-player%} to {spawnpoint.%uuid of loop-player%}:
+            if loop-block is not any bed:
+                delete {spawnpoint.%uuid of loop-player%}

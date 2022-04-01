@@ -12,7 +12,7 @@ options:
 every 1 second:
     loop all players:
         if {combatlog::*} contains loop-player: #Checks if the loop player is in the list
-            set {_CT.span} to difference between {%loop-player%.combatlog.time} and now
+            set {_CT.span} to difference between {combatlog.%loop-player%.time} and now
             set {_CT.cd} to "{@CT-Time} seconds" parsed as timespan
             send action bar "&fYou are in Combat for &e%difference between {_CT.span} and {_CT.cd}%&f. &cDo not disconnect!" to loop-player
 
@@ -80,8 +80,8 @@ on damage:
                             add "%victim%" to {combatlog::*}
                             send "{@Prefix} &fYou are in &cCombat &fwith &e%attacker%" to victim
 
-                        set {%attacker%.combatlog.time} to now
-                        set {%victim%.combatlog.time} to now
+                        set {combatlog.%attacker%.time} to now
+                        set {combatlog.%victim%.time} to now
 
                     else:
                         send "{@Prefix} &c%victim% &6has pvp &cdisabled" to attacker
@@ -122,7 +122,7 @@ on death of player:
 
 every 1 second:
     loop {combatlog::*}:
-        set {_combatlog.gettime} to difference between {%loop-value%.combatlog.time} and now
+        set {_combatlog.gettime} to difference between {combatlog.%loop-value%.time} and now
         if {_combatlog.gettime} > {@CT-Time} seconds:
             remove loop-value from {combatlog::*}
             send action bar "{@Prefix} &fYou are no longer in &cCombat" to loop-value parsed as player

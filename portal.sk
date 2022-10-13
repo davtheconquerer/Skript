@@ -1,3 +1,7 @@
+#
+# This was a skript that I had to develop because our multiverse plugin did some weird stuff...
+#
+
 on portal enter:
     if event-world is "world_the_end":
         if event-entity is a player:

@@ -1,5 +1,5 @@
 # Skript
-These scripts are for my friend's smp so please edit them to your needs. I've tryed to make them as customisable as possible.
+These scripts are for my friend's smp so please edit them to your needs. I've tried to make them as customisable as possible.
 
 Plugins you will need:
 
